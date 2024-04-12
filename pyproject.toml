@@ -1,0 +1,28 @@
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "toussaint"
+version = "0.1.0"
+description = "Geometry processing library"
+authors = [
+  {name = "Alex Curley", email = "acurley31@gmail.com"},
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Repository = "https://github.com/ajcurley/toussaint.git"
+Issues = "https://github.com/ajcurley/toussaint/issues"
+
+[tool.maturin]
+python-source = "python"
+module-name = "toussaint._toussaint_core"
+bindings = "pyo3"
+features = ["pyo3/extension-module"]
