@@ -1,4 +1,6 @@
 use std::ops::{Index, IndexMut};
+
+use pyo3::exceptions::PyIndexError;
 use pyo3::prelude::*;
 
 /// Three-dimensional Cartesian vector
@@ -35,13 +37,22 @@ impl Vector {
     }
 
     /// Get a component by index
-    fn __getitem__(&self, index: usize) -> f64 {
-        self[index]
+    fn __getitem__(&self, index: usize) -> PyResult<f64> {
+        if index > 2 {
+            return Err(PyIndexError::new_err("index out of range"));
+        }
+
+        Ok(self[index])
     }
 
     /// Set a component by index
-    fn __setitem__(&mut self, index: usize, value: f64) {
-        self[index] = value
+    fn __setitem__(&mut self, index: usize, value: f64) -> PyResult<()> {
+        if index > 2 {
+            return Err(PyIndexError::new_err("index out of range"));
+        }
+
+        self[index] = value;
+        Ok(())
     }
 }
 
