@@ -1,14 +1,11 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+use pyo3::prelude::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod geometry;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[pymodule]
+fn toussaint(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    // Geometry
+    m.add_class::<geometry::Vector>()?;
+
+    Ok(())
 }
