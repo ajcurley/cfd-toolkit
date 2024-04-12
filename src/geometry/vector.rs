@@ -1,4 +1,4 @@
-use std::ops::{Index, IndexMut};
+use std::ops::{Add, AddAssign, Index, IndexMut};
 
 use pyo3::exceptions::PyIndexError;
 use pyo3::prelude::*;
@@ -36,8 +36,18 @@ impl Vector {
         }
     }
 
+    /// Get the string representation
+    pub fn __str__(&self) -> String {
+        format!("<Vector x={} y={} z={}>", self.x, self.y, self.z)
+    }
+
+    /// Get the internal string representation
+    pub fn __repr__(&self) -> String {
+        self.__str__()
+    }
+
     /// Get a component by index
-    fn __getitem__(&self, index: usize) -> PyResult<f64> {
+    pub fn __getitem__(&self, index: usize) -> PyResult<f64> {
         if index > 2 {
             return Err(PyIndexError::new_err("index out of range"));
         }
@@ -46,13 +56,23 @@ impl Vector {
     }
 
     /// Set a component by index
-    fn __setitem__(&mut self, index: usize, value: f64) -> PyResult<()> {
+    pub fn __setitem__(&mut self, index: usize, value: f64) -> PyResult<()> {
         if index > 2 {
             return Err(PyIndexError::new_err("index out of range"));
         }
 
         self[index] = value;
         Ok(())
+    }
+
+    /// Add a Vector using the + operator
+    pub fn __add__(&self, other: Vector) -> Vector {
+        *self + other
+    }
+
+    /// Add a Vector using the += operator
+    pub fn __iadd__(&mut self, other: Vector) {
+        *self += other;
     }
 }
 
@@ -77,5 +97,45 @@ impl IndexMut<usize> for Vector {
             2 => &mut self.z,
             _ => panic!("index out of range"),
         }
+    }
+}
+
+impl Add<Vector> for Vector {
+    type Output = Vector;
+
+    fn add(self, other: Vector) -> Self::Output {
+        Vector {
+            x: self.x + other.x,
+            y: self.y + other.y,
+            z: self.z + other.z,
+        }
+    }
+}
+
+impl Add<f64> for Vector {
+    type Output = Vector;
+
+    fn add(self, other: f64) -> Self::Output {
+        Vector {
+            x: self.x + other,
+            y: self.y + other,
+            z: self.z + other,
+        }
+    }
+}
+
+impl AddAssign<Vector> for Vector {
+    fn add_assign(&mut self, other: Vector) {
+        self.x += other.x;
+        self.y += other.y;
+        self.z += other.z;
+    }
+}
+
+impl AddAssign<f64> for Vector {
+    fn add_assign(&mut self, other: f64) {
+        self.x += other;
+        self.y += other;
+        self.z += other;
     }
 }
