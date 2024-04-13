@@ -3,6 +3,7 @@ build:
 
 clean:
 	@cargo clean
+	@rm -rf python/cfd_toolkit/*.so
 
 fmt:
 	@black .
