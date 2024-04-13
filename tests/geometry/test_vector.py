@@ -3,7 +3,7 @@ import unittest
 
 import pytest
 
-from toussaint import Vector
+from cfd_toolkit import Vector
 
 
 class TestVector(unittest.TestCase):

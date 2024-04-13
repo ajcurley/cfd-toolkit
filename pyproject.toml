@@ -3,9 +3,9 @@ requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "toussaint"
+name = "cfd-toolkit"
 version = "0.1.0"
-description = "Geometry processing library"
+description = "Rust/Python library for managing CFD simulations"
 authors = [
   {name = "Alex Curley", email = "acurley31@gmail.com"},
 ]
@@ -18,12 +18,12 @@ classifiers = [
 ]
 
 [project.urls]
-Repository = "https://github.com/ajcurley/toussaint.git"
-Issues = "https://github.com/ajcurley/toussaint/issues"
+Repository = "https://github.com/ajcurley/cfd-toolkit.git"
+Issues = "https://github.com/ajcurley/cfd-toolkit/issues"
 
 [tool.maturin]
 python-source = "python"
-module-name = "toussaint._toussaint_core"
+module-name = "cfd_toolkit._cfd_toolkit_core"
 bindings = "pyo3"
 features = ["pyo3/extension-module"]
 
