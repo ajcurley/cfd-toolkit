@@ -3,7 +3,7 @@ import unittest
 
 import pytest
 
-from cfd_toolkit import Vector
+from cfd_toolkit.geometry import Vector
 
 
 class TestVector(unittest.TestCase):
