@@ -1,10 +1,10 @@
 [package]
-name = "toussaint"
+name = "cfd_toolkit"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "toussaint"
+name = "cfd_toolkit"
 crate-type = ["cdylib"]
 
 [dependencies]

@@ -6,6 +6,7 @@ pub mod geometry;
 fn _cfd_toolkit_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     // Geometry
     m.add_class::<geometry::Vector>()?;
+    m.add_class::<geometry::Aabb>()?;
 
     Ok(())
 }
