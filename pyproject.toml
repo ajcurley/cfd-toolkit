@@ -26,3 +26,9 @@ python-source = "python"
 module-name = "toussaint._toussaint_core"
 bindings = "pyo3"
 features = ["pyo3/extension-module"]
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
