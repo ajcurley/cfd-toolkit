@@ -13,6 +13,14 @@ fn _cfd_toolkit_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<geometry::Vector>()?;
 
     // Mesh
+    m.add_class::<mesh::Face>()?;
+    m.add_class::<mesh::FaceHandle>()?;
+    m.add_class::<mesh::HalfEdge>()?;
+    m.add_class::<mesh::HalfEdgeHandle>()?;
+    m.add_class::<mesh::Patch>()?;
+    m.add_class::<mesh::PatchHandle>()?;
+    m.add_class::<mesh::Vertex>()?;
+    m.add_class::<mesh::VertexHandle>()?;
 
     Ok(())
 }

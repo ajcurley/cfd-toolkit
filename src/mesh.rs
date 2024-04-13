@@ -1,10 +1,8 @@
 pub mod errors;
-pub mod face;
-pub mod patch;
-pub mod point;
+pub mod half_edge;
+pub mod io;
 
 // Re-exports
-pub use errors::NonManifoldError;
-pub use face::Face;
-pub use patch::Patch;
-pub use point::Point;
+pub use errors::*;
+pub use half_edge::*;
+pub use io::*;

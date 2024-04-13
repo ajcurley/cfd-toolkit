@@ -5,7 +5,7 @@ use pyo3::prelude::*;
 
 /// Three-dimensional Cartesian vector
 #[pyclass]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
 pub struct Vector {
     x: f64,
     y: f64,
