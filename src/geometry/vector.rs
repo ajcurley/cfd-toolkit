@@ -20,6 +20,18 @@ impl Vector {
         Vector { x, y, z }
     }
 
+    /// Construct a new Vector of all zeros
+    #[staticmethod]
+    pub fn zeros() -> Vector {
+        Vector::new(0., 0., 0.)
+    }
+
+    /// Construct a new Vector of all ones
+    #[staticmethod]
+    pub fn ones() -> Vector {
+        Vector::new(1., 1., 1.)
+    }
+
     /// Compute the Vector dot product u * v
     #[staticmethod]
     pub fn dot(u: &Vector, v: &Vector) -> f64 {
@@ -34,6 +46,21 @@ impl Vector {
             y: u.z * v.x - u.x * v.z,
             z: u.x * v.y - u.y * v.x,
         }
+    }
+
+    /// Compute the unit Vector
+    pub fn unit(&self) -> Vector {
+        *self / self.mag()
+    }
+
+    /// Convert the Vector to a list
+    pub fn list(&self) -> Vec<f64> {
+        vec![self.x, self.y, self.z]
+    }
+
+    /// Convert the Vector to a dictionary (map)
+    pub fn dict(&self) -> BTreeMap<&str, f64> {
+        BTreeMap::from([("x", self.x), ("y", self.y), ("z", self.z)])
     }
 
     /// Get the string representation
@@ -118,21 +145,6 @@ impl Vector {
     /// Compute the magnitude
     pub fn mag(&self) -> f64 {
         Vector::dot(self, self).sqrt()
-    }
-
-    /// Compute the unit Vector
-    pub fn unit(&self) -> Vector {
-        *self / self.mag()
-    }
-
-    /// Convert the Vector to a list
-    pub fn list(&self) -> Vec<f64> {
-        vec![self.x, self.y, self.z]
-    }
-
-    /// Convert the Vector to a dictionary (map)
-    pub fn dict(&self) -> BTreeMap<&str, f64> {
-        BTreeMap::from([("x", self.x), ("y", self.y), ("z", self.z)])
     }
 }
 

@@ -6,9 +6,11 @@ clean:
 	@rm -rf python/cfd_toolkit/*.so
 
 fmt:
+	@cargo fmt
 	@black .
 
 check_fmt:
+	@cargo fmt --check
 	@black --check .
 
 lint:
