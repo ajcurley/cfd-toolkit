@@ -27,6 +27,19 @@ pub struct Vertex {
     half_edge: HalfEdgeHandle,
 }
 
+#[pymethods]
+impl Vertex {
+    /// Get the point
+    pub fn point(&self) -> Vector {
+        self.point
+    }
+
+    /// Get the half edge handle
+    pub fn half_edge(&self) -> HalfEdgeHandle {
+        self.half_edge
+    }
+}
+
 #[pyclass]
 #[derive(Debug, Copy, Clone, Default, Eq, PartialEq)]
 pub struct FaceHandle(usize);
@@ -50,6 +63,19 @@ impl FaceHandle {
 pub struct Face {
     half_edge: HalfEdgeHandle,
     patch: Option<PatchHandle>,
+}
+
+#[pymethods]
+impl Face {
+    /// Get the half edge handle
+    pub fn half_edge(&self) -> HalfEdgeHandle {
+        self.half_edge
+    }
+
+    /// Get the patch handle
+    pub fn patch(&self) -> Option<PatchHandle> {
+        self.patch
+    }
 }
 
 #[pyclass]
@@ -80,6 +106,39 @@ pub struct HalfEdge {
     twin: Option<HalfEdgeHandle>,
 }
 
+#[pymethods]
+impl HalfEdge {
+    /// Get the origin handle
+    pub fn origin(&self) -> VertexHandle {
+        self.origin
+    }
+
+    /// Get the face handle
+    pub fn face(&self) -> FaceHandle {
+        self.face
+    }
+
+    /// Get the prev half edge handle
+    pub fn prev(&self) -> HalfEdgeHandle {
+        self.prev
+    }
+
+    /// Get the next half edge handle
+    pub fn next(&self) -> HalfEdgeHandle {
+        self.next
+    }
+
+    /// Get the twin half edge handle
+    pub fn twin(&self) -> Option<HalfEdgeHandle> {
+        self.twin
+    }
+
+    /// Check if the half edge is a boundary (no twin)
+    pub fn is_boundary(&self) -> bool {
+        self.twin.is_none()
+    }
+}
+
 #[pyclass]
 #[derive(Debug, Copy, Clone, Default, Eq, PartialEq)]
 pub struct PatchHandle(usize);
@@ -102,4 +161,12 @@ impl PatchHandle {
 #[derive(Debug, Clone)]
 pub struct Patch {
     name: String,
+}
+
+#[pymethods]
+impl Patch {
+    /// Get the name
+    pub fn name(&self) -> &str {
+        &self.name
+    }
 }
