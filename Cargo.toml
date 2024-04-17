@@ -8,6 +8,7 @@ name = "cfd_toolkit"
 crate-type = ["cdylib"]
 
 [dependencies]
+flate2 = { version = "1", features = ["zlib"] }
 pyo3 = { version = "0.21.1", features = ["extension-module"] }
 
 [profile.dev]
