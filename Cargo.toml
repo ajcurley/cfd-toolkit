@@ -10,6 +10,7 @@ crate-type = ["cdylib"]
 [dependencies]
 flate2 = { version = "1", features = ["zlib"] }
 pyo3 = { version = "0.21.1", features = ["extension-module"] }
+meshx = { git = "https://github.com/ajcurley/meshx.git" }
 
 [profile.dev]
 opt-level = 3
