@@ -22,6 +22,10 @@ class TestVector3(unittest.TestCase):
             u = Vector3(3, 2, 1)
             u[3]
 
+        with pytest.raises(OverflowError):
+            u = Vector3(3, 2, 1)
+            u[-1]
+
     def test_add(self):
         """Test adding two Vector3s"""
         u = Vector3(-1, 3, 8)
@@ -80,6 +84,9 @@ class TestVector3(unittest.TestCase):
 
     def test_negative(self):
         """Test the negative of a Vector3"""
+        u = Vector3(0, -4, 7)
+        v = -u
+        self.assertEqual(v, Vector3(0, 4, -7))
 
     def test_dot_product(self):
         """Test computing the dot product"""
