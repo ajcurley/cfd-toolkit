@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.21.1", features = ["extension-module"] }
-meshx = { git = "https://github.com/ajcurley/meshx.git", rev = "7829abb" }
+meshx = { git = "https://github.com/ajcurley/meshx.git", rev = "6a03464" }
 
 [profile.dev]
 opt-level = 3
