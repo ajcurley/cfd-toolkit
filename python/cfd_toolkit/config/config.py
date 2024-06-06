@@ -22,4 +22,8 @@ class Config(BaseModel):
 
         with open(path, "r") as f:
             kwargs = oyaml.load(f, Loader=oyaml.Loader)
-            return Config(working_directory=working_directory, **kwargs)
+
+        config = Config(working_directory=working_directory, **kwargs)
+        config.mesh.assign_defaults()
+
+        return config

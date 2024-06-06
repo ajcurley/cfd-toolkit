@@ -31,8 +31,9 @@ mesh:
       target_level: 10
       curvature_level: 11
     - match: ^contact_patch.*
-      target_level: 11
+      target_level: 12
       curvature_level: 12
+      feature_level: 12
     - match: ^rotating.*
       target_level: 9
       curvature_level: 10
@@ -45,7 +46,7 @@ mesh:
     - match: ^underbody_diffuser_(ls|rs)_strake.*
       target_level: 9
       curvature_level: 10
-    - match: ^tunnel_(inlet|outlet|road)
+    - match: ^tunnel_(inlet|outlet|farfield|road)
       target_level: 2
       curvature_level: 2
       feature_level: 2

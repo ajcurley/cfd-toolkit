@@ -88,6 +88,11 @@ class Mesh(BaseModel):
     surfaces: list[MeshSurface] = Field(default_factory=list)
     volumes: list[MeshVolume] = Field(default_factory=list)
 
+    def assign_defaults(self):
+        """Assign the default values for explicity unset surface controls"""
+        for control in self.surfaces:
+            control.assign_defaults(self.defaults)
+
     def get_surface_control(self, patch):
         """Get the surface control for the patch"""
         control = self.defaults
