@@ -1,6 +1,6 @@
 geometry:
-  - input/vehicle.obj
-  - input/tunnel.obj
+  - input/vehicle.obj.gz
+  - input/tunnel.obj.gz
 regions:
   - name: fluid
     type: fluid
