@@ -1,0 +1,52 @@
+geometry:
+  - input/vehicle.obj
+  - input/tunnel.obj
+regions:
+  - name: fluid
+    type: fluid
+    match: .*
+    location_in_mesh: [-0.774, -0.612, 2.103]
+mesh:
+  base_size: 3.2512
+  buffer_cells: 2
+  curvature_angle: 20
+  feature_angle: 30
+  proximity_cells: 2
+  proximity_level: 12
+  defaults:
+    target_level: 8
+    curvature_level: 8
+    feature_level: 11
+    n_layers: 4
+    first_layer_height: 0.0003
+    layer_growth_rate: 1.4
+  surfaces:
+    - match: ^body.*
+      target_level: 8
+      curvature_level: 9
+    - match: ^body_rear.*
+      target_level: 8
+      curvature_level: 10
+    - match: ^body_rear_wing.*
+      target_level: 10
+      curvature_level: 11
+    - match: ^contact_patch.*
+      target_level: 11
+      curvature_level: 12
+    - match: ^rotating.*
+      target_level: 9
+      curvature_level: 10
+    - match: ^splitter.*
+      target_level: 10
+      curvature_level: 11
+    - match: ^underbody.*
+      target_level: 8
+      curvature_level: 10
+    - match: ^underbody_diffuser_(ls|rs)_strake.*
+      target_level: 9
+      curvature_level: 10
+    - match: ^tunnel_(inlet|outlet|road)
+      target_level: 2
+      curvature_level: 2
+      feature_level: 2
+      n_layers: 0
