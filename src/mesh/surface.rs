@@ -1,5 +1,8 @@
+use std::collections::HashMap;
+
 use meshx::geometry::Aabb;
 use meshx::mesh::half_edge::HeMesh;
+use meshx::mesh::wavefront::ObjWriter;
 use meshx::mesh::{Edge, Face, Patch, Vertex};
 use pyo3::exceptions::PyIOError;
 use pyo3::prelude::*;
@@ -24,6 +27,41 @@ impl SurfaceMesh {
     /// Export a SurfaceMesh to an OBJ file
     pub fn export_obj(&self, path: &str) -> PyResult<()> {
         match self.data.export_obj(path) {
+            Ok(()) => Ok(()),
+            Err(error) => Err(PyIOError::new_err(error.to_string())),
+        }
+    }
+
+    /// Export a SurfaceMesh's edges to an OBJ file
+    pub fn export_obj_edges(&self, path: &str, edge_ids: Vec<usize>) -> PyResult<()> {
+        let mut vertices = vec![];
+        let mut edges = vec![];
+        let mut index_vertices = HashMap::new();
+
+        for edge_id in edge_ids.iter() {
+            let edge = self.edge(*edge_id);
+
+            for vertex_id in vec![edge.p(), edge.q()] {
+                if !index_vertices.contains_key(&vertex_id) {
+                    index_vertices.insert(vertex_id, vertices.len());
+                    vertices.push(self.vertex(vertex_id));
+                }
+            }
+
+            edges.push(edge);
+        }
+
+        for edge in edges.iter_mut() {
+            edge.set_patch(None);
+            edge.set_p(index_vertices[&edge.p()]);
+            edge.set_q(index_vertices[&edge.q()]);
+        }
+
+        let mut writer = ObjWriter::new();
+        writer.set_vertices(vertices);
+        writer.set_edges(edges);
+
+        match writer.write(path) {
             Ok(()) => Ok(()),
             Err(error) => Err(PyIOError::new_err(error.to_string())),
         }
